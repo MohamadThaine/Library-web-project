@@ -1,0 +1,7 @@
+.m-page--transition{
+    background-color: #1f2124;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 100%;
+}

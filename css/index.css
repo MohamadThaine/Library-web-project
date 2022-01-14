@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+	
+}
+
+body{
+	overflow: hidden;
+	background: hsla(0, 0%, 0%, 1);
+}
+
+a{
+	text-decoration: none;
+}
+
+a, a:visited, a:active{
+	padding-top: 10px;
+	color:#1877f2;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+canvas{
+	opacity: 0.50;
+}
+
