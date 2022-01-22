@@ -1,7 +1,22 @@
-.m-page--transition{
-    background-color: #1f2124;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    left: 100%;
+.page-transition{
+    width:0;
+    height:100%;
+    background-image: linear-gradient(141.27deg,#283048,#859398);
+    
+    position:absolute; 
+    z-index: 1;
+    transition: width 0.4s ease-in-out;
+    /* transition: width 0.8s cubic-bezier(0.76, 0.18, 0.34, 0.87); */
+    
 }
+
+.page-transition.activate{
+    width: 100%;
+}
+
+.page-transition.deactivate{
+    right:0;
+    width:0;
+}
+
+
