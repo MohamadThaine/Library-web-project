@@ -44,7 +44,18 @@ function Submit(e){
 
 
 function LoginValidations(LoginResult){
-        !Boolean(LoginResult) ? document.querySelector("#error").innerHTML="You password or username is wrong!": document.querySelector("#error").innerHTML="sucess";
+    if(!Boolean(LoginResult))
+        document.querySelector("#error").innerHTML="You password or username is wrong!";
+    else{
+        document.getElementsByClassName("page-transition")[0].classList.add("activate");
+        setTimeout(function(){ 
+            document.getElementsByClassName("page-transition")[0].classList.replace("activate", "deactivate")
+            setTimeout(function(){ 
+                document.getElementsByClassName("page-transition")[0].classList.remove("deactivate");
+            }, 650);  
+        }, 750);  
+    }
+        // !Boolean(LoginResult) ? document.querySelector("#error").innerHTML="You password or username is wrong!": document.querySelector("#error").innerHTML="sucess";
 }
 
 
