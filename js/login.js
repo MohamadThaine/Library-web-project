@@ -7,7 +7,7 @@ function ResponseHandler(LoginResult){
 async function LoginRedirector(permission){
     permission = permission.trim();
     setTimeout(document.querySelector("#wrapper").remove(), 1000);
-    await new Promise(resolve => setTimeout(()=>{ resolve();}, 5000)); //sleeping for testing purposes no more
+    await new Promise(resolve => setTimeout(()=>{ resolve();}, 1000)); //sleeping for testing purposes no more
     switch (permission) {
         case "1":
             LoadAdminPage();
@@ -47,20 +47,18 @@ function FinishTransition(){
 
 
 function LoadAdminPage(){
-    let element = document.createElement("div");
-    element.innerHTML = "admin";
-    element.id="test1";
-    document.body.append(element);
+    $.get("html/admin.html", (data) => {
+        $("body").append(data);
+    });
     $('head').append('<link rel="stylesheet" href="css/admin.css">');
     console.log("admin");
 
 }
 
 function LoadCustomerPage(){
-    let element = document.createElement("div");
-    element.innerHTML = "customer";
-    element.id="test2";
-    document.body.append(element);
+    $.get("html/customer.html", (data) =>{
+        $("body").append(data);
+    });
     $('head').append('<link rel="stylesheet" href="css/customer.css">');
     console.log("costumer");
 
