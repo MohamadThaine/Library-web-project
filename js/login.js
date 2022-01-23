@@ -21,8 +21,7 @@ async function LoginRedirector(permission){
 }
 
 async function LoginSucceeded(result){
-    if(result == "2")
-        document.getElementsByTagName("canvas")[0].remove();
+    document.getElementsByTagName("canvas")[0].remove();
     StartTranisition();
     await  LoginRedirector(result); 
     FinishTransition(); // this function wont be calledd before LoginRedirector finishes
