@@ -5,10 +5,10 @@
 ?>
 
 <?php
-    $username = $_POST['user'];;
+    $username = $_POST['user'];
     $password = $_POST['pass'];
 
-    $sql = "select Permission from users where UserName = '$username' and Password = '$password' ";
+    $sql = "SELECT Permission FROM users WHERE UserName = '$username' AND Password = '$password' ";
     $row = mysqli_query($conn, $sql);
     $result = mysqli_fetch_assoc($row);
     if(!$result)
