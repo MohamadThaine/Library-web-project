@@ -15,35 +15,49 @@
             <input type="button" value="View Table" id="ViewTable">
         </div>
     </div>   
-    <div class ="model-con" id= "add_con" >
-        <div class = "model">
+    <div class ="model-con" id= "add_con">
+        <form class = "model">
             <p> Book Name</p> <input type="text" name="Book Name" id="Book_Name">
             <p> Publisher Name</p> <input type="text" name="Publisher Name" id="Publisher_Name">
-            <p> Category </p> <input type="text" name="Category Name" id="Category_Name">
+            <p> Category </p> 
+            <select id="Categories" name="categories">
+                <option value="" selected disabled hidden>select a category</option>
+            </select>  
             <p> Edition</p> <input type="number" name="Edition" id="Edition" min="1">
-            <p> Release date </p> <input type="date" id = "Release date">
-            <p> Book Cover</p> <input type="file" name="image" id="Cover">
-            <div class="popup"><input type="submit" value="Add the Book" class="submit" name="submit"><input type="button" value="Close" class="popupbuttons" id="Closeadd" ></div>
-        </div>
+            <p> Release date </p> <input type="date" id = "Release_Date">
+            <p> Book Cover </p> <input type="text" name="image" id = "Cover">
+            <!-- <p> Book Cover</p> <input type="file" name="image" id="Cover"> -->
+            <div class="popup">
+                <input type="submit" value="Add the Book" class="submit" name="SubmitBook" id="AddBook">
+                <input type="button" value="Close" class="popupbuttons" id="Closeadd">
+            </div>
+        </form>
     </div>
     <div class ="model-con" id= "remove_con" >
-        <div class = "model">
+        <form class = "model">
             <p> Book Name</p> <input type="text" name="RBook Name" id="RBook_Name">
-            <div class="popup"><input type="submit" value="Remove the Book" class="submit"  name="submit"><input type="button" value="Close"  id="Closeremove"  ></div>
-        </div>
+            <div class="popup">
+                <input type="submit" value="Remove the Book" class="submit"  name="submit"><input type="button" value="Close"  id="Closeremove">
+            </div>
+        </form>
     </div>
     <div class ="model-con" id= "add_staff" >
-        <div class = "model">
+        <form class = "model">
             <p> Staff Username</p> <input type="text" name="Staff Username" id="Staff_Username">
             <p> E-mail</p> <input type="text" name="E-mail" id="E-mail">
             <p> Password</p> <input type="number" name="Password" id="Password" min="1">
-            <div class="popup"><input type="submit" value="Add Staff" class="submit"  name="submit"><input type="button" value="Close" id="CloseAddStaff"  ></div>
-        </div>
+            <div class="popup">
+                <input type="submit" value="Add Staff" class="submit"  name="submit"><input type="button" value="Close" id="CloseAddStaff">
+            </div>
+        </form>
     </div>
     <div class ="model-con" id= "remove_staff" >
-        <div class = "model">
-            <p> Staff Username</p> <input type="text" name="RStaff Username" id="RStaff_Username">
-            <div class="popup"><input type="submit" value="Remove Staff" class="submit"  name="submit"><input type="button" value="Close" id="CloseRemoveStaff"  ></div>
-        </div>
+        <form class = "model">
+            <p> Staff Username</p> 
+            <input type="text" name="RStaff Username" id="RStaff_Username">
+            <div class="popup">
+                <input type="submit" value="Remove Staff" class="submit"  name="submit"><input type="button" value="Close" id="CloseRemoveStaff">
+            </div>
+        </form>
     </div>
 </div>
