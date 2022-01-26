@@ -51,7 +51,11 @@ function LoadAdminPage(){
     $.get("html/admin.html", (data) => {
         $("body").append(data);
     });
+    $.get("js/admin.js", (data) => {
+        $("head").append(data);
+    });
     $('head').append('<link rel="stylesheet" href="css/admin.css">');
+    $('link[href="css/login.css"]').remove();
     console.log("admin");
 
 }
