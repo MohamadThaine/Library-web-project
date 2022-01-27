@@ -9,6 +9,12 @@ $( document ).ready(function() {
 
 document.getElementById("AddBook").addEventListener('click', AddBookToDB);
 
+document.getElementById("RemoveBook").addEventListener('click', RemoveBookFromDB);
+
+document.getElementById("AddStaffs").addEventListener('click', AddStaffToDB);
+
+document.getElementById("RemoveStaffs").addEventListener('click', RemoveStaffFromDB);
+
 document.getElementById("AddBooks").addEventListener('click', () => {
     add_con.classList.add('show');
 });
@@ -53,6 +59,65 @@ function AddBookToDB(e){
     var ReleaseDate = document.querySelector("#Release_Date").value;
     var BookCover = document.querySelector("#Cover").value;
     var parms = `?Target=${Target}&BookName=${BookName}&PublisherName=${PublisherName}&CategoryID=${CategoryID }&Edition=${Edition}&ReleaseDate=${ReleaseDate}&BookCover=${BookCover}`
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET",`../php/admin.php/${parms}`);
+    xhr.onload =  () => {
+        if (xhr.status == 200) {
+            QueryResult(xhr.responseText.trim());
+        } else {
+            console.log("something went wrong");
+        }
+    };
+    xhr.send();
+   
+    return false;  
+}
+
+function RemoveBookFromDB(e){
+    e.preventDefault();
+    var Target = document.querySelector("#RemoveBook").name;
+    var BookName = document.querySelector("#RBook_Name").value;
+    var parms = `?Target=${Target}&BookName=${BookName}`
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET",`../php/admin.php/${parms}`);
+    xhr.onload =  () => {
+        if (xhr.status == 200) {
+            QueryResult(xhr.responseText.trim());
+        } else {
+            console.log("something went wrong");
+        }
+    };
+    xhr.send();
+   
+    return false;  
+}
+
+function AddStaffToDB(e){
+    e.preventDefault();
+    var Target = document.querySelector("#AddStaffs").name;
+    var Username = document.querySelector("#Staff_Username").value;
+    var Email = document.querySelector("#E-mail").value;
+    var Password  = document.querySelector("#Password").value;
+    var parms = `?Target=${Target}&Username=${Username}&Email=${Email}&Password=${Password}`
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET",`../php/admin.php/${parms}`);
+    xhr.onload =  () => {
+        if (xhr.status == 200) {
+            QueryResult(xhr.responseText.trim());
+        } else {
+            console.log("something went wrong");
+        }
+    };
+    xhr.send();
+   
+    return false;  
+}
+
+function RemoveStaffFromDB(e){
+    e.preventDefault();
+    var Target = document.querySelector("#RemoveStaffs").name;
+    var Username = document.querySelector("#RStaff_Username").value;
+    var parms = `?Target=${Target}&Username=${Username}`
     var xhr = new XMLHttpRequest();
     xhr.open("GET",`../php/admin.php/${parms}`);
     xhr.onload =  () => {
