@@ -12,11 +12,15 @@
             <input type="button" value="Remove Staff" id="RemoveStaff">
         </div>
         <div>
-            <input type="button" value="View Table" id="ViewTable">
+            <input type="button" value="Send message to late customers" name="LateCustomers" id="LateCustomers">
         </div>
-    </div>   
+    </div>  
+    <div id="LogoutDiv">
+        <input type="submit"  value="Logout" name = "Logout" id="Logout">
+    </div> 
     <div class ="model-con" id= "add_con">
         <form class = "model">
+        <BookCover>
             <p> Book Name</p> <input type="text" name="Book Name" id="Book_Name">
             <p> Publisher Name</p> <input type="text" name="Publisher Name" id="Publisher_Name">
             <p> Category </p> 
@@ -25,8 +29,7 @@
             </select>  
             <p> Edition</p> <input type="number" name="Edition" id="Edition" min="1">
             <p> Release date </p> <input type="date" id = "Release_Date">
-            <p> Book Cover </p> <input type="text" name="image" id = "Cover">
-            <!-- <p> Book Cover</p> <input type="file" name="image" id="Cover"> -->
+            <p> Book Cover</p> <input type="file" name="Cover" id="Cover" onchange="previewCover();" >
             <div class="popup">
                 <input type="submit" value="Add the Book" class="submit" name="SubmitBook" id="AddBook">
                 <input type="button" value="Close" class="popupbuttons" id="Closeadd">
@@ -58,6 +61,24 @@
             <div class="popup">
                 <input type="submit" value="Remove Staff" class="submit"  name="RemoveStaff" id="RemoveStaffs"><input type="button" value="Close" id="CloseRemoveStaff">
             </div>
+        </form>
+    </div>
+    <div class ="model-con" id= "viewtable" >
+        <form class = "model">
+            <table id = "list" cellspacing = "0px" cellpadding = "20px" text-align = "center">
+                <thead>
+                    <tr>
+                        <td>CustomerID</td>
+                        <td>BookID</td>
+                        <td>CheckOutDate</td>
+                        <td>ReturnDate</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <input type="button" value="Close" id="CloseViewTable">
         </form>
     </div>
 </div>
