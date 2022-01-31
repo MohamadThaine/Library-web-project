@@ -16,6 +16,18 @@
     border-bottom: 1px solid #e12f53;
     height: 200px;
 }
+#LogoutDiv{
+    display: flex;
+    margin-top: 150px;
+    flex-direction: column;
+    border-top: 1px solid #e12f53;
+    height: 150px;
+}
+
+#Logout{
+    width: 35%;
+    font-size: 200%;
+}
 
 #header{
     display: flex;
@@ -68,6 +80,10 @@ input[type="button"]:hover , input[type="submit"]:hover
     color: #d3d3d3e0;
 }
 
+#LateCustomers
+{
+    width: 50%;
+}
 .model-con{
     opacity: 0;
     pointer-events: none;
@@ -106,3 +122,10 @@ input[type="button"]:hover , input[type="submit"]:hover
     height: 50%;
     width: 65%;
 }
+#CloseViewTable{
+    margin: auto;
+}
+table, th, td {
+    border: 1px solid #231F20;
+    color: lightgray;
+  }

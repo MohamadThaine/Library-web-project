@@ -4,6 +4,7 @@ function ResponseHandler(LoginResult){
 }
 
 
+
 async function LoginRedirector(permission){
     permission = permission.trim();
     setTimeout(document.querySelector("#wrapper").remove(), 1000);

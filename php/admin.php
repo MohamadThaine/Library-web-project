@@ -7,7 +7,7 @@
 <?php
     switch ($_GET["Target"]) {
         case "SubmitBook":
-            AddBook($_GET["BookName"], $_GET["PublisherName"], $_GET["Edition"] , $_GET["ReleaseDate"], $_GET["CategoryID"], $_GET["BookCover"]);
+            AddBook($_GET["BookName"], $_GET["PublisherName"], $_GET["Edition"] , $_GET["ReleaseDate"], $_GET["CategoryID"], $_FILES["BookCover"]);
             break;
         case "RemoveBook":
             RemoveBook($_GET["BookName"]);
@@ -18,7 +18,11 @@
         case "RemoveStaff":
             RemoveStaff($_GET["Username"]);
             break;
-        case "ViewTable":
+        case "LateCustomers":
+            GetLateCustomers();
+            break;
+        case "Logout":
+            Logout();
             break;
     }
 ?>
@@ -28,13 +32,13 @@
         global $conn;
         $sql = "INSERT INTO books(BookName, PublisherName, Edition, ReleaseDate, CategoryID, BookCover) VALUES('$BookName', '$PublisherName', '$Edition', '$ReleaseDate', '$CategoryId', '$BookCover');";
         if(ValidateInputs($BookName, $PublisherName, $Edition, $ReleaseDate, $CategoryId, $BookCover)){
-            $row = mysqli_query($conn, $sql);
-            $CheckResult = ($row ? 1: 0);
-            echo $CheckResult;
-        }
+        $row = mysqli_query($conn, $sql);
+        $CheckResult = ($row ? 1: 0);
+        echo $CheckResult;
     }
+}
+       
 ?>
-
 <?php
     function RemoveBook($BookName){
         global $conn;
@@ -72,6 +76,20 @@
 ?>
 
 <?php
+    function GetLateCustomers(){
+        global $conn;
+        $TodayDate = date('Y/m/d');
+        $sql = "SELECT * FROM borrow WHERE `ReturnDate` = '$TodayDate' ;";
+        $row = mysqli_query($conn, $sql);
+        $result = mysqli_fetch_all($row);
+        if(count($result) <= 0)
+            print_r(json_encode(array()));
+        else
+            print_r(json_encode($result));
+    }
+?>
+
+<?php
   function ValidateInputs($BookName, $PublisherName, $Edition, $ReleaseDate, $CategoryId, $BookCover) {
     return !(empty($BookName) || empty($PublisherName) ||empty($Edition) ||empty($ReleaseDate) || empty($CategoryId) ||empty($BookCover));
 }
@@ -100,4 +118,36 @@
     else
         print_r($result["Permission"]);
 }
+?>
+
+<?php
+    function UploadImageToDb(){
+        if(isset($_POST['SubmitBook']) && isset($_FILES['Cover']))
+            {
+                $CoverName = $_FILES['Cover']['name'];
+                $CoverSize = $_FILES['Cover']['size'];
+                $TmpName = $_FILES['Cover']['tmp_name'];
+                $Error = $_FILES['Cover']['error'];
+                if($Error == 0)
+                {
+                    $img_ex = pathinfo($CoverName, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $AllowedFiles = array("jpg" , "jpeg" , "png");
+                    if(in_array($img_ex_lc,$AllowedFiles))
+                    {
+                        $cover_name = uniqid("IMG-",true).'.'.$img_ex_lc;
+                        $CoverPath = 'BooksCover/'.$cover_name;
+                        move_uploaded_file($TmpName,$CoverPath);
+                    }
+                }
+            }
+        } 
+?>
+
+<?php
+    function Logout()
+    {
+        session_destroy();
+        unset($_SESSION);
+    }
 ?>

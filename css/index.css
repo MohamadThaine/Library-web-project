@@ -26,6 +26,7 @@ a:hover{
 }
 
 canvas{
+	position: absolute;
 	opacity: 0.50;
 }
 

@@ -2,9 +2,11 @@ const add_con = document.getElementById("add_con");
 const remove_con = document.getElementById("remove_con");
 const add_staff = document.getElementById("add_staff");
 const remove_staff = document.getElementById("remove_staff");
+const viewtable = document.getElementById("viewtable");
 
 $( document ).ready(function() {
     GetAllCategories();
+    GetLateCustomers();
   });
 
 document.getElementById("AddBook").addEventListener('click', AddBookToDB);
@@ -14,6 +16,12 @@ document.getElementById("RemoveBook").addEventListener('click', RemoveBookFromDB
 document.getElementById("AddStaffs").addEventListener('click', AddStaffToDB);
 
 document.getElementById("RemoveStaffs").addEventListener('click', RemoveStaffFromDB);
+
+document.getElementById("Logout").addEventListener('click', Logout);
+
+document.getElementById("LateCustomers").addEventListener('click', () => {
+    viewtable.classList.add('show');
+});
 
 document.getElementById("AddBooks").addEventListener('click', () => {
     add_con.classList.add('show');
@@ -48,27 +56,34 @@ document.getElementById("CloseRemoveStaff").addEventListener('click', () => {
     remove_staff.classList.remove('show');
 });
 
+document.getElementById("CloseViewTable").addEventListener('click', () => {
+    viewtable.classList.remove('show');
+});
 
 function AddBookToDB(e){
     e.preventDefault();
-    var Target = document.querySelector("#AddBook").name;
-    var BookName = document.querySelector("#Book_Name").value;
-    var PublisherName = document.querySelector("#Publisher_Name").value;
-    var CategoryID  = document.querySelector("#Categories").value;
-    var Edition = document.querySelector("#Edition").value;
-    var ReleaseDate = document.querySelector("#Release_Date").value;
-    var BookCover = document.querySelector("#Cover").value;
-    var parms = `?Target=${Target}&BookName=${BookName}&PublisherName=${PublisherName}&CategoryID=${CategoryID }&Edition=${Edition}&ReleaseDate=${ReleaseDate}&BookCover=${BookCover}`
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET",`../php/admin.php/${parms}`);
-    xhr.onload =  () => {
-        if (xhr.status == 200) {
-            QueryResult(xhr.responseText.trim());
-        } else {
-            console.log("something went wrong");
-        }
-    };
-    xhr.send();
+    
+    // BookCover =document.getElementById('Cover');
+    // var Target = document.querySelector("#AddBook").name;
+    // var BookName = document.querySelector("#Book_Name").value;
+    // var PublisherName = document.querySelector("#Publisher_Name").value;
+    // var CategoryID  = document.querySelector("#Categories").value;
+    // var Edition = document.querySelector("#Edition").value;
+    // var ReleaseDate = document.querySelector("#Release_Date").value;
+    // var Cover = document.getElementById('Cover').files;
+    // var BookCover = new FormData();
+    // BookCover.append("Cover", Cover[0]);
+    // var parms = `?Target=${Target}&BookName=${BookName}&PublisherName=${PublisherName}&CategoryID=${CategoryID }&Edition=${Edition}&ReleaseDate=${ReleaseDate}&BookCover=${BookCover}`
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("GET",`../php/admin.php/${parms}`);
+    // xhr.onload =  () => {
+    //     if (xhr.status == 200) {
+    //         QueryResult(xhr.responseText.trim());
+    //     } else {
+    //         console.log("something went wrong");
+    //     }
+    // };
+    // xhr.send();
    
     return false;  
 }
@@ -139,7 +154,32 @@ function QueryResult(res){
         console.log("failed :(!");
 }
 
+function GetLateCustomers(e){
+    var Target = document.querySelector("#LateCustomers").name;
+    var parms = `?Target=${Target}`
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET",`../php/admin.php/${parms}`);
+    xhr.onload =  () => {
+        if (xhr.status == 200) {
+            TableMaker(JSON.parse(xhr.response));
+        } else {
+            console.log("something went wrong");
+        }
+    };
+    xhr.send();
+   
+    return false;  
+}
 var jsoon;
+function TableMaker(CustomersJson){
+    var rows = "";
+    CustomersJson.forEach(customer => {
+        rows = "<tr><td>" + customer[1] + "</td><td>" + customer[2] + "</td><td>" + customer[3] + "</td><td>" + customer[4] + "</td></tr>";
+        $(rows).appendTo("#list tbody");
+        console.log(rows);
+    });
+}
+
 function GetAllCategories() {
     var xhr = new XMLHttpRequest();
     xhr.open("GET",`../php/AvailableCategories.php`);
@@ -155,7 +195,6 @@ function GetAllCategories() {
     xhr.send();
 }
 
-
 function OptionsMaker(CategoriesJson){
     CategoriesJson.forEach(category => {
         $('#Categories').append($('<option>', {
@@ -164,5 +203,31 @@ function OptionsMaker(CategoriesJson){
         }));
     });
     
-    
+}
+function LoadLoginPage()
+{
+    $.get("index.html", (data) => {
+        $("body").append(data);
+    });
+    $('head').append('<link rel="stylesheet" href="css/index.css">');  
+    $('head').append('<link rel="stylesheet" href="css/login.css">');   
+    $('link[href="css/admin.css"]').remove();
+    console.log("Login");
+    document.documentElement.innerHTML = '';
+}
+function Logout(e){
+    e.preventDefault();
+    var Target = document.querySelector("#Logout").name
+    var xhr = new XMLHttpRequest();
+    var parms = `?Target=${Target}`
+    xhr.open("GET",`../php/admin.php/${parms}`);
+    xhr.onload =  () => {
+        if (xhr.status == 200) {
+            console.log("Logout Good");
+        } else {
+            console.log("something went wrong");
+        }
+    };
+    xhr.send();
+    LoadLoginPage();
 }
