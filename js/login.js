@@ -21,11 +21,11 @@ async function LoginRedirector(permission){
 }
 
 async function LoginSucceeded(result){
+    sessionStorage.setItem("CurrentUserName", document.querySelector("#user").value);
     document.getElementsByTagName("canvas")[0].remove();
     StartTranisition();
     await  LoginRedirector(result); 
     FinishTransition(); // this function wont be calledd before LoginRedirector finishes
-
 }
 
 function LoginFailed(){
@@ -63,6 +63,9 @@ function LoadAdminPage(){
 function LoadCustomerPage(){
     $.get("html/customer.html", (data) =>{
         $("body").append(data);
+    });
+    $.get("js/customer.js", (data) => {
+        $("head").append(data);
     });
     $('head').append('<link rel="stylesheet" href="css/customer.css">');
     console.log("costumer");
