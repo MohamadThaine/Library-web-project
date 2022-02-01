@@ -121,30 +121,6 @@
 ?>
 
 <?php
-    function UploadImageToDb(){
-        if(isset($_POST['SubmitBook']) && isset($_FILES['Cover']))
-            {
-                $CoverName = $_FILES['Cover']['name'];
-                $CoverSize = $_FILES['Cover']['size'];
-                $TmpName = $_FILES['Cover']['tmp_name'];
-                $Error = $_FILES['Cover']['error'];
-                if($Error == 0)
-                {
-                    $img_ex = pathinfo($CoverName, PATHINFO_EXTENSION);
-                    $img_ex_lc = strtolower($img_ex);
-                    $AllowedFiles = array("jpg" , "jpeg" , "png");
-                    if(in_array($img_ex_lc,$AllowedFiles))
-                    {
-                        $cover_name = uniqid("IMG-",true).'.'.$img_ex_lc;
-                        $CoverPath = 'BooksCover/'.$cover_name;
-                        move_uploaded_file($TmpName,$CoverPath);
-                    }
-                }
-            }
-        } 
-?>
-
-<?php
     function Logout()
     {
         session_destroy();
