@@ -7,7 +7,7 @@
 <?php
     switch ($_GET["Target"]) {
         case "SubmitBook":
-            AddBook($_GET["BookName"], $_GET["PublisherName"], $_GET["Edition"] , $_GET["ReleaseDate"], $_GET["CategoryID"], $_FILES["BookCover"]);
+            AddBook($_GET["BookName"], $_GET["PublisherName"], $_GET["Edition"] , $_GET["ReleaseDate"], $_GET["CategoryID"]);
             break;
         case "RemoveBook":
             RemoveBook($_GET["BookName"]);
@@ -28,10 +28,10 @@
 ?>
 
 <?php
-    function AddBook($BookName, $PublisherName, $Edition, $ReleaseDate , $CategoryId, $BookCover){
+    function AddBook($BookName, $PublisherName, $Edition, $ReleaseDate , $CategoryId){
         global $conn;
-        $sql = "INSERT INTO books(BookName, PublisherName, Edition, ReleaseDate, CategoryID, BookCover) VALUES('$BookName', '$PublisherName', '$Edition', '$ReleaseDate', '$CategoryId', '$BookCover');";
-        if(ValidateInputs($BookName, $PublisherName, $Edition, $ReleaseDate, $CategoryId, $BookCover)){
+        $sql = "INSERT INTO books(BookName, PublisherName, Edition, ReleaseDate, CategoryID) VALUES('$BookName', '$PublisherName', '$Edition', '$ReleaseDate', '$CategoryId');";
+        if(ValidateInputs($BookName, $PublisherName, $Edition, $ReleaseDate, $CategoryId)){
         $row = mysqli_query($conn, $sql);
         $CheckResult = ($row ? 1: 0);
         echo $CheckResult;
@@ -90,8 +90,8 @@
 ?>
 
 <?php
-  function ValidateInputs($BookName, $PublisherName, $Edition, $ReleaseDate, $CategoryId, $BookCover) {
-    return !(empty($BookName) || empty($PublisherName) ||empty($Edition) ||empty($ReleaseDate) || empty($CategoryId) ||empty($BookCover));
+  function ValidateInputs($BookName, $PublisherName, $Edition, $ReleaseDate, $CategoryId) {
+    return !(empty($BookName) || empty($PublisherName) ||empty($Edition) ||empty($ReleaseDate) || empty($CategoryId));
 }
 ?>
 

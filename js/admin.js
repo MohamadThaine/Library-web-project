@@ -63,27 +63,24 @@ document.getElementById("CloseViewTable").addEventListener('click', () => {
 function AddBookToDB(e){
     e.preventDefault();
     
-    // BookCover =document.getElementById('Cover');
-    // var Target = document.querySelector("#AddBook").name;
-    // var BookName = document.querySelector("#Book_Name").value;
-    // var PublisherName = document.querySelector("#Publisher_Name").value;
-    // var CategoryID  = document.querySelector("#Categories").value;
-    // var Edition = document.querySelector("#Edition").value;
-    // var ReleaseDate = document.querySelector("#Release_Date").value;
-    // var Cover = document.getElementById('Cover').files;
-    // var BookCover = new FormData();
-    // BookCover.append("Cover", Cover[0]);
-    // var parms = `?Target=${Target}&BookName=${BookName}&PublisherName=${PublisherName}&CategoryID=${CategoryID }&Edition=${Edition}&ReleaseDate=${ReleaseDate}&BookCover=${BookCover}`
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("GET",`../php/admin.php/${parms}`);
-    // xhr.onload =  () => {
-    //     if (xhr.status == 200) {
-    //         QueryResult(xhr.responseText.trim());
-    //     } else {
-    //         console.log("something went wrong");
-    //     }
-    // };
-    // xhr.send();
+    BookCover =document.getElementById('Cover');
+    var Target = document.querySelector("#AddBook").name;
+    var BookName = document.querySelector("#Book_Name").value;
+    var PublisherName = document.querySelector("#Publisher_Name").value;
+    var CategoryID  = document.querySelector("#Categories").value;
+    var Edition = document.querySelector("#Edition").value;
+    var ReleaseDate = document.querySelector("#Release_Date").value;
+    var parms = `?Target=${Target}&BookName=${BookName}&PublisherName=${PublisherName}&CategoryID=${CategoryID }&Edition=${Edition}&ReleaseDate=${ReleaseDate}`
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET",`../php/admin.php/${parms}`);
+    xhr.onload =  () => {
+        if (xhr.status == 200) {
+            QueryResult(xhr.responseText.trim());
+        } else {
+            console.log("something went wrong");
+        }
+    };
+    xhr.send();
    
     return false;  
 }

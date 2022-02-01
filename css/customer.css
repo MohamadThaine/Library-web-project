@@ -68,3 +68,34 @@
     font-weight: bold;
     color: #c32b49;
 }
+
+.model-con{
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 15%;
+    height: 25%;
+    background: linear-gradient(141.27deg,#250123,#741a2c);
+    border: 1px solid black;
+    transition-duration: 0.4s; 
+}
+.model-con.show {
+    opacity: 1;
+    pointer-events: auto;
+    transition-duration: 0.8s; 
+}
+.model{
+    text-align: center;
+    font-size: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn{
+    border-radius: 12px;
+    border: 2px solid black;
+    background-color: white;
+    cursor:pointer;
+    padding: 10px 24px;
+    transition-duration: 0.4s; 
+}
