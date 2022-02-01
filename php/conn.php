@@ -16,11 +16,5 @@
         public function ConnectToDb(){
             Connection::$conn = new mysqli($this->dbServerName, $this->dbUserName, $this->dbPassword, $this->dbName) or die("unable to connect to the database!");
         }
-
-        public function status(){
-            if(Connection::$conn)
-               return 1;
-            return 0;
-        }
     }
 ?>
