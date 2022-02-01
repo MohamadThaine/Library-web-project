@@ -1,9 +1,16 @@
-// var c = document.getElementById("canv");
-// var canvas = c.getContext("2d");
+function StartTranisition(){
+  document.getElementsByClassName("page-transition")[0].classList.add("activate");
+}
 
-// var w = c.width = window.innerWidth;
-// var h = c.height = window.innerHeight;
-//
+function FinishTransition(){
+  setTimeout(function(){ 
+      document.getElementsByClassName("page-transition")[0].classList.replace("activate", "deactivate")
+      setTimeout(()=>{
+          document.getElementsByClassName("page-transition")[0].classList.remove("deactivate");
+      }, 650);  
+  }, 750);
+}
+
 var c = document.createElement('canvas');
 var w = c.width = $(window).width();
 var h = c.height = $(window).height();

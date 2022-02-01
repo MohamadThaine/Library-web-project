@@ -204,17 +204,26 @@ function OptionsMaker(CategoriesJson){
     });
     
 }
-function LoadLoginPage()
+async function LoadLoginPage()
 {
-    $.get("index.html", (data) => {
-        $("body").append(data);
-    });
-    $('head').append('<link rel="stylesheet" href="css/index.css">');  
-    $('head').append('<link rel="stylesheet" href="css/login.css">');   
-    $('link[href="css/admin.css"]').remove();
-    console.log("Login");
-    document.documentElement.innerHTML = '';
+    StartTranisition();
+    await  LoginPagePreparations(); 
+    FinishTransition();
 }
+
+async function LoginPagePreparations(){
+    await new Promise(resolve => setTimeout(()=>{ resolve();}, 1000));
+    document.getElementsByTagName("canvas")[0].style.display = "block";
+    document.querySelector("#admin-wrapper").remove();
+    $("script[src='../js/login.js']").remove()
+    $.get("js/index.js", (data) => {
+        $("head").append(data);
+    });
+    $('link[href="css/admin.css"]').remove();
+    $('head').append('<link rel="stylesheet" href="css/login.css">');  
+} 
+
+
 function Logout(e){
     e.preventDefault();
     var Target = document.querySelector("#Logout").name
@@ -229,5 +238,6 @@ function Logout(e){
         }
     };
     xhr.send();
+    sessionStorage.clear();  
     LoadLoginPage();
 }
