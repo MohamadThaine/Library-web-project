@@ -6,6 +6,12 @@ $.get("../html/login.html", function(data){
 });
 
 
+$( document ).ready(function() {
+    checkDOMChange();
+});
+
+
+
 function checkDOMChange()
 {
     if(Form){
@@ -35,7 +41,7 @@ function Submit(e){
 }
 
 
-
-
-
-checkDOMChange();
+function test(e){
+    e.preventDefault();
+    console.log("hello world");
+}
