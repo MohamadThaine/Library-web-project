@@ -4,7 +4,6 @@ function ResponseHandler(LoginResult){
 }
 
 
-
 async function LoginRedirector(permission){
     permission = permission.trim();
     setTimeout(document.querySelector("#wrapper").remove(), 1000);
@@ -23,7 +22,8 @@ async function LoginRedirector(permission){
 
 async function LoginSucceeded(result){
     sessionStorage.setItem("CurrentUserName", document.querySelector("#user").value);
-    document.getElementsByTagName("canvas")[0].remove();
+    document.getElementsByTagName("canvas")[0].style.display = "none";
+    $("script[src='../js/index.js']").remove()
     StartTranisition();
     await  LoginRedirector(result); 
     FinishTransition(); // this function wont be calledd before LoginRedirector finishes
@@ -33,19 +33,6 @@ function LoginFailed(){
     document.querySelector("#error").innerHTML="Your password or username is wrong!";
 }
 
-function StartTranisition(){
-    document.getElementsByClassName("page-transition")[0].classList.add("activate");
-}
-
-
-function FinishTransition(){
-    setTimeout(function(){ 
-        document.getElementsByClassName("page-transition")[0].classList.replace("activate", "deactivate")
-        setTimeout(()=>{
-            document.getElementsByClassName("page-transition")[0].classList.remove("deactivate");
-        }, 650);  
-    }, 750);
-}
 
 
 function LoadAdminPage(){
